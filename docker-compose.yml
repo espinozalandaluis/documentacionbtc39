@@ -12,16 +12,22 @@ services:
     logging:
       options:
         max-size: 1g
+    networks:
+      - some-net
   ms-configserver:
     build: ./ms_configserver
     container_name: ms-configserver
     ports:
       - "8888:8888"
+    networks:
+      - some-net
   ms-discoveryserver:
     build: ./ms_discoveryserver
     container_name: ms-discoveryserver
     ports:
       - "8761:8761"
+    networks:
+      - some-net
   ms-product:
     build: ./ms_product
     container_name: ms-product
@@ -35,3 +41,8 @@ services:
     depends_on:
       - ms-configserver
       - ms-discoveryserver
+    networks:
+      - some-net
+networks:
+  some-net:
+    driver: bridge
