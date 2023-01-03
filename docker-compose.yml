@@ -6,6 +6,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpwd
+    volumes:
+      - ${MONGO_HOST_DATA}/db:/data/db
     ports:
       - 27018:27017
     restart: always
@@ -13,21 +15,21 @@ services:
       options:
         max-size: 1g
     networks:
-      - some-net
+      - btc39-net
   ms-configserver:
     build: ./ms_configserver
     container_name: ms-configserver
     ports:
       - "8888:8888"
     networks:
-      - some-net
+      - btc39-net
   ms-discoveryserver:
     build: ./ms_discoveryserver
     container_name: ms-discoveryserver
     ports:
       - "8761:8761"
     networks:
-      - some-net
+      - btc39-net
   ms-product:
     build: ./ms_product
     container_name: ms-product
@@ -40,7 +42,47 @@ services:
       - ms-discoveryserver
       - mongodbcontainer
     networks:
-      - some-net
+      - btc39-net
+  ms-client:
+    build: ./ms_client
+    container_name: ms-client
+    ports:
+      - "8082:8082"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - mongodbcontainer
+    networks:
+      - btc39-net
+  ms-gateway:
+    build: ./ms_gateway
+    container_name: ms-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - ms-product
+      - ms-client
+    networks:
+      - btc39-net
+  ms-pasivoahorro:
+    build: ./ms_pasivoahorro
+    container_name: ms-pasivoahorro
+    ports:
+      - "8084:8084"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - ms-client
+      - ms-product
+      - mongodbcontainer
+    networks:
+      - btc39-net
 networks:
-  some-net:
+  btc39-net:
     driver: bridge
