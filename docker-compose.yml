@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  mongo-db:
+  mongodbcontainer:
     image: mongo:latest
     container_name: mongodbcontainer
     environment:
@@ -31,16 +31,14 @@ services:
   ms-product:
     build: ./ms_product
     container_name: ms-product
-    environment:
-      DB_URL: mongodb://mongodbcontainer:27018/db_producto
-      DB_USERNAME: root
-      DB_PASSWORD: rootpwd
-      URL_CONFIG_SERVER: http://ms-configserver:8888
     ports:
       - "8081:8081"
+    links:
+      - mongodbcontainer
     depends_on:
       - ms-configserver
       - ms-discoveryserver
+      - mongodbcontainer
     networks:
       - some-net
 networks:
