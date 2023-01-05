@@ -83,6 +83,36 @@ services:
       - mongodbcontainer
     networks:
       - btc39-net
+  ms-pasivocuentacorriente:
+    build: ./ms_pasivocuentacorriente
+    container_name: ms-pasivocuentacorriente
+    ports:
+      - "8085:8085"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - ms-client
+      - ms-product
+      - mongodbcontainer
+    networks:
+      - btc39-net
+  ms-pasivoplazofijo:
+    build: ./ms_pasivoplazofijo
+    container_name: ms-pasivoplazofijo
+    ports:
+      - "8086:8086"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - ms-client
+      - ms-product
+      - mongodbcontainer
+    networks:
+      - btc39-net
 networks:
   btc39-net:
     driver: bridge
