@@ -113,6 +113,51 @@ services:
       - mongodbcontainer
     networks:
       - btc39-net
+  ms-activopersonal:
+    build: ./ms_activopersonal
+    container_name: ms-activopersonal
+    ports:
+      - "8087:8087"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - ms-client
+      - ms-product
+      - mongodbcontainer
+    networks:
+      - btc39-net
+  ms-activoempresarial:
+    build: ./ms_activoempresarial
+    container_name: ms-activoempresarial
+    ports:
+      - "8088:8088"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - ms-client
+      - ms-product
+      - mongodbcontainer
+    networks:
+      - btc39-net
+  ms-tarjetacredito:
+    build: ./ms_tarjetacredito
+    container_name: ms-tarjetacredito
+    ports:
+      - "8089:8089"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - ms-client
+      - ms-product
+      - mongodbcontainer
+    networks:
+      - btc39-net
 networks:
   btc39-net:
     driver: bridge
