@@ -49,6 +49,9 @@ services:
   ms-client:
     build: ./ms_client
     container_name: ms-client
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8082:8082"
     links:
@@ -62,6 +65,9 @@ services:
   ms-gateway:
     build: ./ms_gateway
     container_name: ms-gateway
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8080:8080"
     depends_on:
@@ -74,6 +80,9 @@ services:
   ms-pasivoahorro:
     build: ./ms_pasivoahorro
     container_name: ms-pasivoahorro
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8084:8084"
     links:
@@ -89,6 +98,9 @@ services:
   ms-pasivocuentacorriente:
     build: ./ms_pasivocuentacorriente
     container_name: ms-pasivocuentacorriente
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8085:8085"
     links:
@@ -104,6 +116,9 @@ services:
   ms-pasivoplazofijo:
     build: ./ms_pasivoplazofijo
     container_name: ms-pasivoplazofijo
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8086:8086"
     links:
@@ -119,6 +134,9 @@ services:
   ms-activopersonal:
     build: ./ms_activopersonal
     container_name: ms-activopersonal
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8087:8087"
     links:
@@ -134,6 +152,9 @@ services:
   ms-activoempresarial:
     build: ./ms_activoempresarial
     container_name: ms-activoempresarial
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8088:8088"
     links:
@@ -149,6 +170,9 @@ services:
   ms-tarjetacredito:
     build: ./ms_tarjetacredito
     container_name: ms-tarjetacredito
+        environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8089:8089"
     links:
