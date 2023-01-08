@@ -66,8 +66,7 @@ services:
     build: ./ms_gateway
     container_name: ms-gateway
     environment:
-      - URL_CONFIG_SERVER=http://ms-configserver:8888
-      - PROFILE=prod
+      - URL_EUREKA_SERVER=http://ms-discoveryserver:8761/eureka/
     ports:
       - "8080:8080"
     depends_on:
