@@ -7,7 +7,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpwd
     volumes:
-      - ${MONGO_HOST_DATA}/db:/data/db
+      - ~/myvol/_data:/data/db
     ports:
       - 27018:27017
     restart: always
