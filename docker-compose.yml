@@ -17,14 +17,14 @@ services:
     networks:
       - btc39-net
   ms-configserver:
-    build: ./ms_configserver
+    image: aespinozar19/btc39-ms-configserver
     container_name: ms-configserver
     ports:
       - "8888:8888"
     networks:
       - btc39-net
   ms-discoveryserver:
-    build: ./ms_discoveryserver
+    image: aespinozar19/btc39-ms-discoveryserver
     container_name: ms-discoveryserver
     ports:
       - "8761:8761"
@@ -33,6 +33,9 @@ services:
   ms-product:
     build: ./ms_product
     container_name: ms-product
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
     ports:
       - "8081:8081"
     links:
