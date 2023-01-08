@@ -169,7 +169,7 @@ services:
   ms-tarjetacredito:
     build: ./ms_tarjetacredito
     container_name: ms-tarjetacredito
-        environment:
+    environment:
       - URL_CONFIG_SERVER=http://ms-configserver:8888
       - PROFILE=prod
     ports:
