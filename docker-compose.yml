@@ -1,5 +1,16 @@
 version: "3.9"
 services:
+  redis:
+    image: redis
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/myredis/conf:/usr/local/etc/redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - btc39-net
   mongodbcontainer:
     image: mongo:latest
     container_name: mongodbcontainer
@@ -182,6 +193,24 @@ services:
       - ms-client
       - ms-product
       - mongodbcontainer
+    networks:
+      - btc39-net
+  ms-report:
+    build: ./ms_report
+    container_name: ms-report
+    environment:
+      - URL_CONFIG_SERVER=http://ms-configserver:8888
+      - PROFILE=prod
+    ports:
+      - "8083:8083"
+    links:
+      - mongodbcontainer
+    depends_on:
+      - ms-configserver
+      - ms-discoveryserver
+      - mongodbcontainer
+      - zookeeper
+      - kafka
     networks:
       - btc39-net
   zookeeper1:
