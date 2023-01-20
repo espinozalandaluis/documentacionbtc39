@@ -42,7 +42,8 @@ services:
     networks:
       - btc39-net
   ms-product:
-    build: ./ms_product
+#    build: ./ms_product
+    image: aespinozar19/btc39-ms-product
     container_name: ms-product
     environment:
       - URL_CONFIG_SERVER=http://ms-configserver:8888
@@ -59,7 +60,8 @@ services:
     networks:
       - btc39-net
   ms-client:
-    build: ./ms_client
+#    build: ./ms_client
+    image: aespinozar19/btc39-ms-client
     container_name: ms-client
     environment:
       - URL_CONFIG_SERVER=http://ms-configserver:8888
@@ -76,7 +78,8 @@ services:
     networks:
       - btc39-net
   ms-gateway:
-    build: ./ms_gateway
+#    build: ./ms_gateway
+    image: aespinozar19/btc39-ms-gateway
     container_name: ms-gateway
     environment:
       - URL_EUREKA_SERVER=http://ms-discoveryserver:8761/eureka/
